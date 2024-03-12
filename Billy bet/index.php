@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost'; // or '127.0.0.1'
-$dbname = 'billybet';
-$username = 'root';
-$password = '';
+require 'config.php';
+$query = "SELECT * FROM fighter";
+$result = $pdo->query($query);
+$rows = $result->fetchAll(PDO::FETCH_ASSOC);
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
