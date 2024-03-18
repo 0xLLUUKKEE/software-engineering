@@ -5,13 +5,13 @@
 }
 body{
   background-color: black; 
-    font-family: sans-serif;
+    font-family: fantasy;
     text-align: center;
     display: flex;
     font-size: 21px;
     flex-direction: column;
     height: 95vh;
-    color: white;
+    color: goldenrod;
     
      
 }
@@ -19,21 +19,21 @@ body{
 header{
    background-color: black;
     padding: 2em 0 2em 0;
-    border: px solid orange;
+    border: 3px solid darkorange;
     padding: .1rem;
 }
 .left{
    background-color: black;
     padding: 3em 0 3em 0;
     flex: 1 1 100px;
-    border: 1px solid orange;
+    border: 3px solid darkorange;
     padding: .1rem;
 }
 .right{
   background-color: black;
     padding: 3em 0 3em 0;
     flex: 1 1 100px;
-    border: 8px solid orange;
+    border: 3px solid darkorange;
     padding: .1rem;
     font-family:cursive;
 }
@@ -42,14 +42,21 @@ main{
  background-color: black;
     padding: 3em 0 3em 0;
     flex: 5 5 150px;
-    border: 8px solid orange;
+    border: 3px solid darkorange;
     padding: .1rem;
+}
+.big-input {
+    width: 300px;
+    height: 50px;
+    font-size: 19px;
+    font-weight: bold;
+    color: rebeccapurple;
 }
 
 footer{
   background-color: black;
     padding: 1em 0 1em 0;
-    border: 8px solid orange;
+    border: 3px solid darkorange;
     padding: .1rem;
 }
 .container{
@@ -69,7 +76,7 @@ display: flex;
 
 li{
   padding: 2em 0 2em 0;
-    border: 1px solid orange;
+    border: 8px solid darkorange;
     padding: .1rem;   
     
 }
@@ -82,7 +89,7 @@ p{
 nav{
   background-color: black;
     padding: 2em 0 2em 0;
-    border: 8px solid white;
+    border: 8px solid darkorange;
     padding: .1rem; 
     
     
@@ -115,21 +122,4 @@ p a:hover{
   font-family:sans-serif; 
 }
 
-
-
-
-
-
-table{
-  width: 100%;
-  border: 1px solid orange;
-  /*border-collapse: collapse;*/
-  margin: 10px 0;
-}
-th, td {
-  padding: 10px;
-  border: 1px solid orange;
-  color: white;
-  text-align: center; /* Center the content */
-}
 
