@@ -16,6 +16,17 @@ body{
      
 }
 
+table, th, td {
+  border: 1px solid black;
+}
+
+.float {
+    float: left;
+    margin-right: 20px;
+    
+}
+
+
 header{
    background-color: black;
     padding: 2em 0 2em 0;
