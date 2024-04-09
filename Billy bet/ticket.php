@@ -26,10 +26,11 @@
       <main>
 
             <?php
+                require_once 'events.php';
                 require_once 'config.php';
                 session_start();
                 $bet = unserialize($_SESSION['bet']);
-                echo $bet;
+                echo $bet->getDetails();
             ?>
         <a href="betpage.php">Bet Again?</a>
           

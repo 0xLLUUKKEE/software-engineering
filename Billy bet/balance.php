@@ -37,13 +37,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
        <div class="topnav" id="myTopnav">
   
-   <center>
-  <a href="index.php">Home Page</a>
-  <a href="betpage.php">Bet Page</a>
+        <center>
+        <a href="index.php">Home Page</a>
+        <a href="betpage.php">Bet Page</a>
 
-       </center>
+            </center>
          
-</div>
+    </div>
     
   <div class="container">
      

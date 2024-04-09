@@ -1,4 +1,5 @@
 <?php
+//require 'users.php';
 
 class Event {
     public $name;
@@ -74,14 +75,13 @@ class Fight {
     }
     
     public function getFightDetails() {
-        $details = "Fight Details:\n";
-        $details .= "Event: {$this->event->getName()} ({$this->event->getDate()}) - {$this->event->getType()}\n";
-        $details .= "Location: {$this->event->getLocation()}\n";
-        $details .= "Fighters: {$this->fighter1->getName()} (Rank: {$this->fighter1->getRank()}) vs {$this->fighter2->getName()} (Rank: {$this->fighter2->getRank()})\n";
-        $details .= "Ticket Price (Minimum Bet): {$this->ticket->getPrice()}\n";
+        $details = "<h2>Fight Details:</h3>";
+        $details .= "<h3>Event: {$this->event->getName()} ({$this->event->getDate()})</h3> <h3> fight type: {$this->event->getType()}</h3>";
+        $details .= "<h3>Location: {$this->event->getLocation()}</h3><br>";
+        $details .= "<h2>Fighters: </h2><h3>{$this->fighter1->getName()} (Rank: {$this->fighter1->getRank()}) vs {$this->fighter2->getName()} (Rank: {$this->fighter2->getRank()})</h3>";
+        $details .= "<h3>Ticket Price (Minimum Bet): {$this->ticket->getPrice()}</h3><br>";
         return $details;
     }
-    
     function calculate_bet_odds($rank_fighter1, $rank_fighter2) {
         // Generate random base odds
         $base_odds_fighter1 = mt_rand(50, 100) / 100; // Random number between 0.5 and 1.0
@@ -106,23 +106,35 @@ class Bet{
     public $customer;
     public $amountBet;
     public $winnings;
+    public $receipt;
+    public $hasWon;
     
     public function __construct(Fight $fight, Customer $customer, $amountBet){
         $this->fight = $fight;
         $this->customer = $customer;
-        $this->$amountBet = $amountBet;
-        $customer.withdrawBalance($amountBet);
-        if(hasWon()){
-            $winnings = $amountBet * 2;
+        $this->amountBet = $amountBet;
+
+        $customer->withdrawBalance($amountBet);
+        if($this->hasWon()){
+            $this->winnings = $amountBet * 2;
+            $this->hasWon = "True";
         }
         else{
-            $winnings = 0;
+            $this->winnings = 0;
+            $this->hasWon = "False";
         }
 
-        $customer.addBalance($winnings);
-        return "TICKET RECEIPT:\n
-        Customer Name: " . $customer->getName() . $fight.getFightDetails() . 
-        "\nAmount Bet: " . $amountBet . "\nWon Bet: " . "\nWinnings: " . $winnings;
+        $customer->addBalance($this->winnings);
+        $_SESSION['User'] = serialize($this->customer);
+
+        $this->receipt =  "<h1>TICKET RECEIPT:</h1><br>
+        <h3>Customer Name: " . $this->customer->getName() . "</h3><br>" . $this->fight->getFightDetails() . 
+        "<h3>Amount Bet: " . $this->amountBet . "</h3><h3>Won Bet: " . $this->hasWon . "</h3><h3>Winnings: " . $this->winnings . "</h3>";
+
+    }
+
+    public function getDetails(){
+        return $this->receipt;
     }
     
     public function hasWon(){

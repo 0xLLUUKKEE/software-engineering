@@ -18,6 +18,7 @@ class Customer extends User {
     public $balance;
     public $name;
     public $age;
+    public $email;
     
     public function __construct($email, $password, $name, $age, $balance) {
         parent::__construct($email, $password);
@@ -26,6 +27,9 @@ class Customer extends User {
         $this->name = $name;
         $this->age = $age;
         $this->balance = $balance;
+    }
+    public function updateBalanceInSession() {
+        $_SESSION['User'] = serialize($this);
     }
 
     public function getName(){

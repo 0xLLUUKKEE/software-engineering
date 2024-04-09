@@ -82,5 +82,7 @@ if(isset($_POST['submit'])){
         <input type="text" name="password" id="password"><br>
         <input type="submit" name="submit" value="Submit">
     </form>
+
+    <a href="signup.php">Dont Have An Account?</a>
 </body>
 </html>

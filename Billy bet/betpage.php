@@ -35,19 +35,10 @@
           require_once 'users.php';
           require_once 'events.php';
           session_start();
-          $user = unserialize($_SESSION['User']);
-          $balance = $user->getBalance();
+          $curuser = unserialize($_SESSION['User']);
+          $balance = $curuser->getBalance();
 
 
-          if (isset($_POST['Submit'])) {
-            $bet = new Bet($fight1, $user, escape($_POST['email']));
-            $_SESSION['bet'] = serialize($bet);
-
-            echo '<script language="javascript">';
-            echo 'alert("Fighter successfully added!");';
-            echo 'window.location.href = "fighters.php";';
-            echo '</script>';
-          }
 
           
           
@@ -67,17 +58,6 @@
           $fighterData = $statement->fetch(PDO::FETCH_ASSOC);
           $fighter2 = new Fighter($fighterData['Fighter name'], 2);
           
-         /* 
-          // Query to select the fighter names where id doesn't equal 2
-          $sql = "SELECT `Fighter name` FROM fighter WHERE id = 3";
-          $statement = $pdo->prepare($sql);
-          $fighter3 = new Fighter($statement, 1);
-
-          // Query to select the fighter names with ranks 2 where id doesn't equal 2
-          $sql = "SELECT `Fighter name` FROM fighter WHERE id = 4";
-          $statement = $pdo->prepare($sql);
-          $fighter4 = new Fighter($statement, 4);
-*/
           // if ranks are 1 or 2 then set type to championship, otherwise set to fight night
           $eventType = $fighter1->getRank() == 1 || $fighter2->getRank() == 1 ? "Championship Fight" : "Fight Night";
           $locations = ["Vegas", "Miami", "New York"];
@@ -86,14 +66,7 @@
           $event1 = new Event($eventType, "2024-03-21", $eventType, $location1);
           $ticket1 = new Ticket(15); // Single ticket price
           $fight1 = new Fight($fighter1, $fighter2, $event1, $ticket1);
-          //$fight1Odds = $fight1->calculate_bet_odds($fighter1,$fighter2);
-          
-/*         
-          $location2 = $locations[array_rand($locations)]; // Random location
-          $event2 = new Event($eventType, "2024-03-21", $eventType, $location2);
-          $ticket2 = new Ticket(10); // Single ticket price
-          $fight2 = new Fight($fighter3, $fighter4, $event2, $ticket2);
-*/
+
             echo "<br>";
             echo "<h3>" . $event1->getName() . "</h3>";
             echo "<h4> Location: " . $event1->getLocation() . "</h4>";
@@ -110,6 +83,7 @@
             echo"<td>" . $fight1->fighter1->getRank() . "</td>";
             echo"<td>" . $fight1->ticket->getPrice() . "</td>";
             echo"<td>" . $fight1->calculate_bet_odds($fighter1,$fighter2)[0] . "</td>";
+            //echo "<td>" . ($odds[0] ?? '') . "</td>"; // Checking if the first element exists before accessing it
             echo "</tr>";
             echo"<tr>";
             echo"<td>" . $fight1->fighter2->getName() . "</td>";
@@ -124,11 +98,29 @@
                 <input type="number" required id="amount" name="amount" min="' . $fight1->ticket->getPrice() .'" value="15" class="big-input">
 
                   
-                <input type="Submit" name="bet" id="bet" value="Place Bet" onclick="Submit">
+                <input type="Submit" name="Submit" id="bet" value="Place Bet" onclick="Submit">
                 </form>';
+
+            
+          if (isset($_POST['Submit'])) {
+            if($_POST['amount'] > $curuser->getBalance()){
+              echo '<script language="javascript">';
+              echo 'alert("Insufficiant funds!");';
+              echo '</script>';
+
+            }
+            $bet = new Bet($fight1, $curuser, $_POST['amount']);
+            $curuser->updateBalanceInSession();
+
+            echo '<script language="javascript">';
+            echo 'alert("Bet successfully placed!");';
+            $_SESSION['bet'] = serialize($bet);
+            echo 'window.location.href = "ticket.php";';
+            echo '</script>';
+          }
                 
                 
-            ?>  
+        ?>  
         
           
     </main>
@@ -136,7 +128,6 @@
       <div class="right">
    
           <img src="images/buy-now-button.png" width="200" height="200">
-        
         
           <p>Place a Bet!!</p>
       <p></p>
