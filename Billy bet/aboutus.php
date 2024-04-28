@@ -45,7 +45,7 @@
           <br>
        <h3>BillyBet Gambling is a Gambling company that specialisies in UFC MMA fights. BillyBet Gambling was founded in 2006, and in 2007 was the 3rd most popular website for gambling estimating over 2 million users per month. Our companys aim is to push for a more wider appeal in the UFC sports betting market. Our company is improving everyday to give our customers the premium betting experience when using our website</h3><br>
 
-          <h3>BillyBet Gambling in now way endorses reckless spending, and always looks out for the safety and responsibility of our customers</h3>
+          <h3>BillyBet Gambling in no way endorses reckless spending, and always looks out for the safety and responsibility of our customers</h3>
           
           <br>
           <img src="images/25614-7-mma-transparent-image.jpeg" width="200" height="200">

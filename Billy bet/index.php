@@ -25,8 +25,9 @@
     
     
       <div class="left">
-           <img src="images/avatar-.jpg" width="100" height="100">
-          <img src="images/avatar-.jpg" width="100" height="100">
+           <img src="images/12.jpg" width="200" height="200">
+           <img src="images/coins.png" width="200" height="200">
+           <img src="images/11.jpg" width="200" height="200">
          
       </div>
     
@@ -40,8 +41,9 @@
       </main>
       
       <div class="right">
-    <img src="images/avatar-.jpg" width="100" height="100" >
-          <img src="images/avatar-.jpg" width="100" height="100">
+           <img src="images/12.jpg" width="200" height="200">
+           <img src="images/coins.png" width="200" height="200">
+           <img src="images/11.jpg" width="200" height="200">
         
         
           <p>Place a Bet!!</p>
