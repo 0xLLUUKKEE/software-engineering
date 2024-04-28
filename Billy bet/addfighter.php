@@ -9,11 +9,11 @@ if (isset($_POST['submit'])) {
     $rank = escape($_POST['rank']);
     //$fightID = escape($_POST['fightID']);
 
-    $sql = "INSERT INTO fighter (`Fighter Name`, `Rank`, `Fight_idFight`) VALUES (:fighterName, :rank, :fightID)";
+    $sql = "INSERT INTO fighter (`Fighter Name`, `Rank`) VALUES (:fighterName, :rank)";
     $statement = $pdo->prepare($sql);
     $statement->bindValue(':fighterName', $fighterName);
     $statement->bindValue(':rank', $rank);
-    $statement->bindValue(':fightID', $fightID);
+    //$statement->bindValue(':fightID', $fightID);
 
     $success = $statement->execute();
 
