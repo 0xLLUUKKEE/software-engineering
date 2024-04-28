@@ -108,6 +108,53 @@ class Bet{
     public $winnings;
     public $receipt;
     public $hasWon;
+
+    public function cashback($betAmount) {
+        // Return 1 euro for bet amounts 10 or less
+        if ($betAmount <= 10) {
+            return 1;
+        } 
+        // Return 2 euros for bet amounts 20 or less
+        else if ($betAmount <= 20) {
+            return 3;
+        } 
+        // Return 6 euros for bet amounts 30 or less
+        else if ($betAmount <= 30) {
+            return 6;
+        } 
+        // Return 7 euros for bet amounts 40 or less
+        else if ($betAmount <= 40) {
+            return 7;
+        } 
+        // Return 8 euros for bet amounts 50 or less
+        else if ($betAmount <= 50) {
+            return 8;
+        } 
+        // Return 9 euros for bet amounts 60 or less
+        else if ($betAmount <= 60) {
+            return 9;
+        } 
+        // Return 13 euros for bet amounts 70 or less
+        else if ($betAmount <= 70) {
+            return 13;
+        } 
+        // Return 16 for bet amounts 80 or less
+        else if ($betAmount <= 80) {
+            return 16;
+        } 
+        // Return 18 for bet amounts 90 or less
+        else if ($betAmount <= 90) {
+            return 18;
+        } 
+        // Return 20 euros for bet amounts 100 or less
+        else if ($betAmount <= 100) {
+            return 20;
+        } 
+        // Return 5 euros for bet amounts over 100
+        else {
+            return 25;
+        }
+    }
     
     public function __construct(Fight $fight, Customer $customer, $amountBet){
         $this->fight = $fight;
@@ -124,12 +171,13 @@ class Bet{
             $this->hasWon = "False";
         }
 
+        $customer->addBalance($this->cashback($this->amountBet));
         $customer->addBalance($this->winnings);
         $_SESSION['User'] = serialize($this->customer);
 
         $this->receipt =  "<h1>TICKET RECEIPT:</h1><br>
         <h3>Customer Name: " . $this->customer->getName() . "</h3><br>" . $this->fight->getFightDetails() . 
-        "<h3>Amount Bet: " . $this->amountBet . "</h3><h3>Won Bet: " . $this->hasWon . "</h3><h3>Winnings: " . $this->winnings . "</h3>";
+        "<h3>Amount Bet: " . $this->amountBet . "</h3><h3>Won Bet: " . $this->hasWon . "</h3><h3>Winnings: " . $this->winnings . "</h3>" . "<h3>Cashback: " . $this->cashback($this->amountBet). "</h3><br>";
 
     }
 

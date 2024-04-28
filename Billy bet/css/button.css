@@ -1,0 +1,33 @@
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(255, 215, 0, 0.9); /* Semi-transparent gold background */
+}
+
+.modal-content {
+    background-color: white; /* Dark background for the content */
+    color: white; /* White text color */
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    text-align: center;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #f0ad4e; /* Bootstrap's button-warning color */
+    border: none;
+    color: white; /* Text color for the button */
+}
+
+button:hover {
+    background-color: #ec971f; /* Darker orange on hover for better UX */
+}

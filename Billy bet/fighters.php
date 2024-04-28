@@ -7,7 +7,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['id']) && isset($_POST['rank'])) {
         $ids = $_POST['id'];
         $ranks = $_POST['rank'];
-
+        // Check if ranks are unique
+        $uniqueRanks = array_unique($ranks);
+        if (count($ranks) !== count($uniqueRanks)) {
+            echo '<script language="javascript">';
+            echo 'alert("Ranks must be unique! Please assign different ranks to fighters.");';
+            echo 'window.history.back();'; // Redirect back to the form
+            echo '</script>';
+            exit(); // Stop further execution
+        }
         // Update ranks in the database
         for ($i = 0; $i < count($ids); $i++) {
             $id = $ids[$i];

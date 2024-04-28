@@ -1,8 +1,28 @@
 <?php 
-require 'config.php';
+require_once 'config.php';
 require 'users.php';
 require 'common.php';
+
     if (isset($_POST['submit'])) {
+        // Check if the email already exists in the database
+    $existing_email = $_POST['email'];
+    $sql = "SELECT * FROM customer WHERE Email = :email";
+    $statement = $pdo->prepare($sql);
+    $statement->execute(array(':email' => $existing_email));
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if ($user != null) {
+        echo '<script language="javascript">';
+        echo 'alert("Email already exists! Please use a different email address.");';
+        echo '</script>';
+    } 
+    else if(strlen($_POST['password']) > 8){
+        echo '<script language="javascript">';
+        echo 'alert("Password must be under 8 characters!");';
+        echo '</script>';
+        
+    }
+    else {
         $new_user = array(
             "Email" => escape($_POST['email']),
             "Password" => escape($_POST['password']),
@@ -15,19 +35,20 @@ require 'common.php';
         $statement = $pdo->prepare($sql);
         //$statement->execute($new_user);
         $success = $statement->execute($new_user);
-
-    if ($success){
-        $user = new Customer($row['Email'], $row['Password'], $row['Name'], $row['Age'], $row['Balance']);
-        echo '<script language="javascript">';
-        echo 'alert("Account successfully created!");';
-        echo 'window.location.href = "login.php";';
-        echo '</script>';
-        exit();
-    }
-    else {
-        echo '<script language="javascript">';
-        echo 'alert("Error creating account!")'; // Display error message if execution failed
-        echo '</script>';
+        
+        if ($success){
+            $user = new Customer($row['Email'], $row['Password'], $row['Name'], $row['Age'], $row['Balance']);
+            echo '<script language="javascript">';
+            echo 'alert("Account successfully created!");';
+            echo 'window.location.href = "login.php";';
+            echo '</script>';
+            exit();
+        }
+        else {
+            echo '<script language="javascript">';
+            echo 'alert("Error creating account!")'; // Display error message if execution failed
+            echo '</script>';
+        }
     }
 }
 
@@ -43,36 +64,12 @@ function getSavedValue($key) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Billy Bet</title>
     <link rel="stylesheet" href="css/style.css">
-    <script>
-    // Function to save data to cookies immediately after input changes
-    function saveToCookie(fieldName, fieldValue, expiryDays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (expiryDays*24*60*60*1000));
-        let expires = "expires="+ d.toUTCString();
-        document.cookie = fieldName + "=" + encodeURIComponent(fieldValue) + ";" + expires + ";path=/";
-    }
-
-    // Attach event listeners to form fields
-    window.onload = function() {
-        document.getElementById('name').addEventListener('input', function() {
-            saveToCookie('Name', this.value, 1);
-        });
-        document.getElementById('age').addEventListener('input', function() {
-            saveToCookie('Age', this.value, 1);
-        });
-        document.getElementById('email').addEventListener('input', function() {
-            saveToCookie('Email', this.value, 1);
-        });
-        document.getElementById('password').addEventListener('input', function() {
-            saveToCookie('Password', this.value, 1);
-        });
-    };
-    </script>
+    <script src="localStorageHandling.js"></script>
+    
 </head>
 <body>
     <header><img src="images/20240228_1128511.gif" width="600" height="120"></header>
     <h1>Sign Up!</h1>
-    
     <form method="post">
         <label for="name">Full Name</label><br>
         <input type="text" name="name" id="name" value="<?php echo getSavedValue('Name'); ?>" required><br>
@@ -91,5 +88,6 @@ function getSavedValue($key) {
     <div class="topnav" id="myTopnav">
         <a href="login.php">Already Have An Account?</a>
     </div>
+    
 </body>
 </html>

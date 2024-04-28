@@ -12,7 +12,9 @@ require 'events.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Billy Bet</title>
-    <link rel="stylesheet" href="css/style.css">   
+    <link rel="stylesheet" href="css/style.css"> 
+    <script src="handlePageLoad.js"></script>
+
 </head>
 <body>
     <header><img src="images/20240228_1128511.gif" width="600" height="120"></header>
@@ -23,8 +25,19 @@ require 'events.php';
         <a href="index.php">Home Page</a>
         <a href="betpage.php">Bet Page</a>
         <a href="balance.php">Balance</a>
+        <a href="aboutus.php">About Us</a>
 
             </center>
+           
+<div id="myModal" class="modal">
+        <div class="modal-content">
+            <img src="images/303.png" alt="303" style="width:50%; height: auto;">
+            
+            <H1>Bet on the championship fight?</H1>
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
          
     </div>
     <h1>Fighter Stats</h1>

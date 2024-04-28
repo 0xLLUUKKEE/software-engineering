@@ -1,12 +1,11 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 require('config.php');
 require_once('common.php');
 require 'users.php';
 session_start();
 
-// Define $email and $password variables outside of the if block
+
+// Define $email and $password variables
 $email = isset($_POST['email']) ? $_POST['email'] : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
 
@@ -55,9 +54,7 @@ if(isset($_POST['submit'])){
             echo '</script>'; 
         } 
     }    
-
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -66,20 +63,21 @@ if(isset($_POST['submit'])){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Billy Bet</title>
-    <link rel="stylesheet" href="css/style.css">   
+    <link rel="stylesheet" href="css/style.css">
+    <script src="localStorageHandling.js"></script>
+  
 </head>
 
 <body>
     <header><img src="images/20240228_1128511.gif" width="600" height="120"></header>
     
     <h1>Log in</h1>
-    <br><br><br><br>
     
     <form method="post">
         <label for="email">Email Address</label><br>
         <input type="email" name="email" id="email" required><br>
         <label for="password">Password</label><br>
-        <input type="text" name="password" id="password"><br>
+        <input type="password" name="password" id="password" required><br>
         <input type="submit" name="submit" value="Submit">
     </form>
 

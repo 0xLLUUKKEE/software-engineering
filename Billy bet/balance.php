@@ -40,6 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <center>
         <a href="index.php">Home Page</a>
         <a href="betpage.php">Bet Page</a>
+        <a href="fighter-stats.php">Fighter Stats</a>
+        <a href="aboutus.php">About Us</a>
 
             </center>
          

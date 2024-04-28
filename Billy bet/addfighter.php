@@ -5,31 +5,46 @@ require 'common.php';
 session_start();
 
 if (isset($_POST['submit'])) {
+
     $fighterName = escape($_POST['name']);
     $rank = escape($_POST['rank']);
-    //$fightID = escape($_POST['fightID']);
-
-    $sql = "INSERT INTO fighter (`Fighter Name`, `Rank`) VALUES (:fighterName, :rank)";
+    $sql = "SELECT * FROM `fighter` WHERE (`Fighter Name` = :name) OR (`Rank` = :rank)";
     $statement = $pdo->prepare($sql);
-    $statement->bindValue(':fighterName', $fighterName);
+    $statement->bindValue(':name', $fighterName);
     $statement->bindValue(':rank', $rank);
-    //$statement->bindValue(':fightID', $fightID);
+    $statement->execute();
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-    $success = $statement->execute();
-
-    if ($success) {
-
+    if($user != null){
         echo '<script language="javascript">';
-        echo 'alert("Fighter successfully added!");';
-        echo 'window.location.href = "fighters.php";';
+        echo 'alert("Fighter with that name or rank already exists! Please add a Fighter with a unique rank and name.");';
         echo '</script>';
-        exit();
-    } else {
-        echo '<script language="javascript">';
-        echo 'alert("Error adding fighter!")'; // Display error message if execution failed
-        echo '</script>';
+
+    }
+    else{
+        $sql = "INSERT INTO fighter (`Fighter Name`, `Rank`) VALUES (:fighterName, :rank)";
+        $statement = $pdo->prepare($sql);
+        $statement->bindValue(':fighterName', $fighterName);
+        $statement->bindValue(':rank', $rank);
+        //$statement->bindValue(':fightID', $fightID);
+
+        $success = $statement->execute();
+
+        if ($success) {
+
+            echo '<script language="javascript">';
+            echo 'alert("Fighter successfully added!");';
+            echo 'window.location.href = "fighters.php";';
+            echo '</script>';
+            exit();
+        } else {
+            echo '<script language="javascript">';
+            echo 'alert("Error adding fighter!")'; // Display error message if execution failed
+            echo '</script>';
+        }
     }
 }
+
 ?>
 
 <!DOCTYPE html>

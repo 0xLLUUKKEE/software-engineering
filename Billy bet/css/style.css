@@ -94,8 +94,8 @@ li{
 }
 
 p{
-   color: black;
-    font-family: fantasy
+   color: aliceblue;
+    font-family: fantasy;
 }
 
 nav{
@@ -134,4 +134,8 @@ p a:hover{
   font-family:sans-serif; 
 }
 
+a{
+    color: white;
+    text-decoration: none;
+}
 
