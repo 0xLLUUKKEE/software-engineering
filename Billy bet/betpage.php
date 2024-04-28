@@ -16,6 +16,7 @@
        <div class="topnav" id="myTopnav">
         <a href="index.php">Home Page</a>
         <a href="balance.php">Top Up Balnce</a>
+        <a href="fighter-stats.php">Fighter Stats</a>
       </div>
     
   <div class="container">
